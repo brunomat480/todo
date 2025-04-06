@@ -1,17 +1,21 @@
+import clipboardImg from '@/assets/img/clipboard.png';
+import { Counters } from '@/components/Counters/indes';
+
 import styles from './styles.module.css';
 
 export function TaskList() {
   return (
-    <div className={styles.taskList}>
-      <div className={styles.counters}>
-        <div>
-          <small>Tarefas criadas</small>
-          <span>0</span>
-        </div>
+    <div className={styles.container}>
+      <Counters />
 
+      <div className={styles.taskList}>
         <div>
-          <small>Concluídas</small>
-          <span>0</span>
+          <img src={clipboardImg} alt="Prancheta" />
+
+          <p>
+            <strong>Você ainda não tem tarefas cadastradas</strong> <br /> Crie
+            tarefas e organize seus itens a fazer
+          </p>
         </div>
       </div>
     </div>

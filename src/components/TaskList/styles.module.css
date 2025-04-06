@@ -1,38 +1,20 @@
-.taskList {
+.container {
   margin-top: 4rem;
 }
 
-.counters {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.taskList {
+  border-top: 1px solid var(--gray-300);
+  border-radius: 8px;
+
+  margin-top: 1.5rem;
 }
 
-.counters div {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
-
+.taskList > div {
+  margin-top: 4rem;
+  text-align: center;
 }
 
-.counters div small {
-  font: var(--text-md);
-  color: var(--blue);
-  font-weight: 700;
-}
-
-.counters div + div small {
-  color: var(--purple);
-}
-
-.counters div span {
-  background-color: var(--gray-400);
-  padding: 0.125rem 0.5rem;
-  border-radius: 999px;
-
-  font: var(--text-sm);
-  color: var(--gray-200);
-  font-weight: 700;
-  line-height: normal;
+.taskList > div p {
+  margin-top: 1rem;
+  color: var(--gray-300);
 }
