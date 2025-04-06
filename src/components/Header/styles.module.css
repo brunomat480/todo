@@ -1,0 +1,8 @@
+.headerContainer {
+  background-color: var(--gray-700);
+
+  padding-block: 4.5rem 3.3125rem;
+
+  display: flex;
+  justify-content: center;
+}
