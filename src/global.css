@@ -17,9 +17,9 @@
 
  --font-family: "Inter", sans-serif;
 
- --text-normal: 1rem/140%;
- --text-md: 0.875rem/140%;
- --text-sm: 0.75rem/140%;
+ --text-normal: 1rem/140% var(--font-family);
+ --text-md: 0.875rem/140% var(--font-family);
+ --text-sm: 0.75rem/140% var(--font-family);
 }
 
 :focus {
@@ -44,10 +44,11 @@ input,
 button {
   font-family: var(--font-family);
   font-weight: 400;
-  font-size: var(--text-normal);
+  font: var(--text-normal);
 }
 
 main {
   max-width: 736px;
   margin: auto;
+  padding-inline: 1rem;
 }
