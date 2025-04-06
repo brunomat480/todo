@@ -5,7 +5,7 @@
   border: 1px solid var(--gray-700);
   border-radius: 8px;
   color: var(--gray-100);
-  box-shadow: none;
+  outline: none;
 
   transition: 0.2s ease;
 }
@@ -16,4 +16,5 @@
 
 .input:focus {
   border: 1px solid var(--purple-dark);
+  box-shadow: none;
 }

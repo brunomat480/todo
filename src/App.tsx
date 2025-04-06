@@ -1,4 +1,4 @@
-import { AddTaskInput } from '@/components/AddTaskInput';
+import { AddTask } from '@/components/AddTask';
 import { Header } from '@/components/Header';
 import '@/global.css';
 
@@ -8,7 +8,7 @@ export function App() {
       <Header />
 
       <main>
-        <AddTaskInput placeholder="Adicione uma nova tarefa" />
+        <AddTask />
       </main>
     </>
   );
