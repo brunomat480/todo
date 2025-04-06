@@ -24,7 +24,8 @@
 
 :focus {
   outline: none;
-  box-shadow: 0 0 0 2px var(--purple);
+  box-shadow: 0 0 0 2px var(--purple-dark);
+  border-radius: 4px;
 }
 
 * {
@@ -44,4 +45,9 @@ button {
   font-family: var(--font-family);
   font-weight: 400;
   font-size: var(--text-normal);
+}
+
+main {
+  max-width: 736px;
+  margin: auto;
 }
