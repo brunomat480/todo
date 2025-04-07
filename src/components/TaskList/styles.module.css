@@ -3,18 +3,9 @@
 }
 
 .taskList {
-  border-top: 1px solid var(--gray-300);
-  border-radius: 8px;
-
   margin-top: 1.5rem;
 }
 
-.taskList > div {
-  margin-top: 4rem;
-  text-align: center;
-}
+.task {
 
-.taskList > div p {
-  margin-top: 1rem;
-  color: var(--gray-300);
 }

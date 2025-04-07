@@ -1,5 +1,5 @@
-import clipboardImg from '@/assets/img/clipboard.png';
 import { Counters } from '@/components/Counters/indes';
+import { TaskCard } from '@/components/TaskCard';
 
 import styles from './styles.module.css';
 
@@ -7,15 +7,11 @@ export function TaskList() {
   return (
     <div className={styles.container}>
       <Counters />
-
       <div className={styles.taskList}>
-        <div>
-          <img src={clipboardImg} alt="Prancheta" />
+        {/* <EmptyList /> */}
 
-          <p>
-            <strong>Você ainda não tem tarefas cadastradas</strong> <br /> Crie
-            tarefas e organize seus itens a fazer
-          </p>
+        <div>
+          <TaskCard />
         </div>
       </div>
     </div>
