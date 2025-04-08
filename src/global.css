@@ -46,9 +46,3 @@ button {
   font-weight: 400;
   font: var(--text-normal);
 }
-
-main {
-  max-width: 736px;
-  margin: auto;
-  padding-inline: 1rem;
-}
