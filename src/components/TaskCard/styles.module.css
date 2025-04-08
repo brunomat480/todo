@@ -1,0 +1,82 @@
+.task {
+  background-color: var(--gray-500);
+  padding: 1rem;
+  border: 1px solid var(--gray-400);
+  border-radius: 8px;
+  box-sizing: initial;
+
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.task + .task {
+  margin-top: 0.75rem  ;
+}
+
+.task > div {
+  width: 100%;
+  display: flex;
+  align-items: start;
+  gap: 0.75rem;
+}
+
+.task > div input {
+  min-width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  border: 3px solid var(--blue);
+  appearance: none;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  background-position: center;
+
+  transition: 0.2s;
+}
+
+.task > div input:hover {
+  border: 3px solid var(--blue-dark);
+  background-color: #1e6f9f33;
+}
+
+.task > div input:checked {
+  background-image: url("../../assets/icons/checked.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 1rem;
+  background-color: var(--purple-dark);
+  border: 3px solid var(--purple-dark);
+}
+
+.task > div input:checked:hover {
+  background-color: var(--purple);
+  border: 3px solid var(--purple);
+}
+
+.task > div p {
+  color: var(--gray-100);
+  word-break: break-all;
+}
+
+.task > div p.completed {
+  text-decoration: line-through;
+}
+
+.task button {
+  background-color: transparent;
+  border: none;
+  border-radius: 4px;
+  padding: 0.3125rem 0.375rem;
+  color: var(--gray-300);
+  line-height: 0;
+  cursor: pointer;
+}
+
+.task button:hover {
+  background-color: var(--gray-400);
+  color: var(--danger);
+
+  transition: 0.2s;
+}

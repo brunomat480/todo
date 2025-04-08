@@ -1,0 +1,11 @@
+.container {
+  margin-top: 4rem;
+}
+
+.taskList {
+  margin-top: 1.5rem;
+}
+
+.taskList .tasks{
+  margin-bottom: 9rem;
+}
