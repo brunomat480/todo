@@ -6,19 +6,21 @@ import styles from './styles.module.css';
 
 interface ITaskCard {
   task: ITask;
-  onSelectingTaskToMarkAsCompleted: (value: number) => void;
+  onMarkingTaskAsCompleted: (value: number) => void;
+  onDeleteTask: (value: number) => void;
 }
 
 export function TaskCard({
   task,
-  onSelectingTaskToMarkAsCompleted,
+  onMarkingTaskAsCompleted,
+  onDeleteTask,
 }: ITaskCard) {
   return (
     <div className={styles.task}>
       <div>
         <input
           checked={task.is_completed}
-          onChange={() => onSelectingTaskToMarkAsCompleted(task.id)}
+          onChange={() => onMarkingTaskAsCompleted(task.id)}
           type="checkbox"
           name=""
           id=""
@@ -28,7 +30,7 @@ export function TaskCard({
         </p>
       </div>
 
-      <button type="button">
+      <button onClick={() => onDeleteTask(task.id)} type="button">
         <Trash size={24} />
       </button>
     </div>

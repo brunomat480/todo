@@ -18,7 +18,7 @@ export function App() {
     ]);
   }
 
-  function markingTaskAsCompleted(id: number) {
+  function handleMarkingTaskAsCompleted(id: number) {
     setTaksList((state) =>
       state.map((task) => {
         if (task.id === id) {
@@ -31,6 +31,10 @@ export function App() {
     );
   }
 
+  function handleDeleteTask(id: number) {
+    setTaksList((state) => state.filter((task) => task.id !== id));
+  }
+
   return (
     <>
       <Header />
@@ -39,7 +43,8 @@ export function App() {
         <AddTask onAddNewTask={addNewTask} />
         <TaskList
           tasksList={tasksList}
-          onMarkingTaskAsCompleted={markingTaskAsCompleted}
+          onMarkingTaskAsCompleted={handleMarkingTaskAsCompleted}
+          onDeleteTask={handleDeleteTask}
         />
       </main>
     </>

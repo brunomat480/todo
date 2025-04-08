@@ -8,13 +8,14 @@ import styles from './styles.module.css';
 interface ITaskList {
   tasksList: ITask[];
   onMarkingTaskAsCompleted: (value: number) => void;
+  onDeleteTask: (value: number) => void;
 }
 
-export function TaskList({ tasksList, onMarkingTaskAsCompleted }: ITaskList) {
-  function handleSelectingTaskToMarkAsCompleted(id: number) {
-    onMarkingTaskAsCompleted(id);
-  }
-
+export function TaskList({
+  tasksList,
+  onMarkingTaskAsCompleted,
+  onDeleteTask,
+}: ITaskList) {
   return (
     <div className={styles.container}>
       <Counters />
@@ -25,9 +26,8 @@ export function TaskList({ tasksList, onMarkingTaskAsCompleted }: ITaskList) {
               <TaskCard
                 key={task.id}
                 task={task}
-                onSelectingTaskToMarkAsCompleted={
-                  handleSelectingTaskToMarkAsCompleted
-                }
+                onMarkingTaskAsCompleted={onMarkingTaskAsCompleted}
+                onDeleteTask={onDeleteTask}
               />
             ))}
           </div>
