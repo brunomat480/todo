@@ -18,7 +18,7 @@ export function TaskList({
 }: ITaskList) {
   return (
     <div className={styles.container}>
-      <Counters />
+      <Counters tasksList={tasksList} />
       <div className={styles.taskList}>
         {tasksList.length > 0 ? (
           <div className={styles.tasks}>
