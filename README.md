@@ -35,12 +35,6 @@ ou
 ```bash
 npm run dev
 ```
-
-##
-
-#### api
-inicie a aplicação:
-```bash
 yarn dev
 ```
 ou 
