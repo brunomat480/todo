@@ -1,4 +1,4 @@
-# todo-list
+# todo
 
 <div> 
   <p><img align="center" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" />ReactJS</p>
@@ -29,12 +29,6 @@ npm i
 #### web
 inicie a aplicação:
 ```bash
-yarn dev
-```
-ou 
-```bash
-npm run dev
-```
 yarn dev
 ```
 ou 
