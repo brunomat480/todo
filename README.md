@@ -2,7 +2,7 @@
 
 <div> 
   <p><img align="center" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" />ReactJS</p>
-  <p><img align="center" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/styledcomponents/styledcomponents-original.svg" /></p>
+  <p><img align="center" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/styledcomponents/styledcomponents-original.svg" />styled-components</p>
 </div>
 
 <img src="https://user-images.githubusercontent.com/69431006/233848036-8b416eff-edee-47eb-959e-4a79947a04aa.png" />
