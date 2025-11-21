@@ -1,41 +1,53 @@
 import { PlusCircle } from '@phosphor-icons/react';
 import { ChangeEvent, FormEvent, useState } from 'react';
+import { toast } from 'sonner';
+
+import { ITask } from '@/@types/ITask';
+import { api } from '@/lib/api';
 
 import styles from './styles.module.css';
 
 interface IAddTaskProps {
-  onAddNewTask: (value: string) => void;
+  onAddNewTask: (value: ITask) => void;
 }
 
 export function AddTask({ onAddNewTask }: IAddTaskProps) {
-  const [task, setTask] = useState('');
+  const [description, setDescription] = useState('');
   const [taskValidate, setTaskValidate] = useState('');
 
   function handleTask(event: ChangeEvent<HTMLInputElement>) {
-    setTask(event.target.value);
+    setDescription(event.target.value);
 
     setTaskValidate('');
   }
 
-  function handleAddNewTask(event: FormEvent) {
+  async function handleAddNewTask(event: FormEvent) {
     event.preventDefault();
 
-    if (!task) {
+    if (!description) {
       setTaskValidate('Preencha o campo');
       return;
     }
 
-    onAddNewTask(task);
-    setTask('');
+    try {
+      const { data } = await api.post('/tasks', {
+        description,
+      });
+      onAddNewTask(data);
+    } catch {
+      toast.error('Erro ao criar tarefa, tente novamente!');
+    }
+
+    setDescription('');
   }
 
-  const isNewTaskEmpty = !task;
+  const isNewTaskEmpty = !description;
 
   return (
     <form noValidate onSubmit={handleAddNewTask} className={styles.addTask}>
       <div className={styles.input}>
         <input
-          value={task}
+          value={description}
           onChange={handleTask}
           placeholder="Adicione uma nova tarefa"
           required

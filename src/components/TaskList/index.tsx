@@ -7,8 +7,8 @@ import styles from './styles.module.css';
 
 interface ITaskList {
   tasksList: ITask[];
-  onMarkingTaskAsCompleted: (value: number) => void;
-  onDeleteTask: (value: number) => void;
+  onMarkingTaskAsCompleted: (value: string) => void;
+  onDeleteTask: (value: string) => Promise<void>;
 }
 
 export function TaskList({

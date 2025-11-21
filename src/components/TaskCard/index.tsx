@@ -7,8 +7,8 @@ import styles from './styles.module.css';
 
 interface ITaskCard {
   task: ITask;
-  onMarkingTaskAsCompleted: (value: number) => void;
-  onDeleteTask: (value: number) => void;
+  onMarkingTaskAsCompleted: (value: string) => void;
+  onDeleteTask: (value: string) => Promise<void>;
 }
 
 export function TaskCard({
@@ -28,7 +28,7 @@ export function TaskCard({
         event.key === 'Enter'
       ) {
         event.preventDefault();
-        onMarkingTaskAsCompleted(Number(inputElement?.value));
+        onMarkingTaskAsCompleted(inputElement?.value);
       }
     }
 
