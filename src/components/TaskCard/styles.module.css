@@ -74,7 +74,7 @@
   cursor: pointer;
 }
 
-.task button:hover {
+.task button:not(:disabled):hover {
   background-color: var(--gray-400);
   color: var(--danger);
 

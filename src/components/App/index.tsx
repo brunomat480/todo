@@ -1,5 +1,5 @@
 import '@/global.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 import { toast, Toaster } from 'sonner';
 
 import { ITask } from '@/@types/ITask';
@@ -12,51 +12,54 @@ import styles from './styles.module.css';
 
 export function App() {
   const [tasksList, setTaksList] = useState<ITask[]>([]);
+  const [isLoadingTaskList, setIsLoadingTaskList] = useTransition();
+  const [isPedingTask, setIsPedingTask] = useTransition();
 
   async function addNewTask(task: ITask) {
     setTaksList((state) => [...state, task]);
   }
 
   async function handleDeleteTask(id: string) {
-    try {
-      await api.delete(`/tasks/${id}`);
-      const { data } = await api.get('/tasks');
-      setTaksList(data);
-    } catch {
-      toast.error('Erro ao deletar tarefa, tente novamente!');
-    }
+    setIsPedingTask(async () => {
+      try {
+        await api.delete(`/tasks/${id}`);
+
+        setTaksList((prevState) => prevState.filter((task) => task.id !== id));
+      } catch {
+        toast.error('Erro ao deletar tarefa, tente novamente!');
+      }
+    });
   }
 
   useEffect(() => {
-    async function fetchTasks() {
-      try {
-        const { data } = await api.get('/tasks');
+    function fetchTasks() {
+      setIsLoadingTaskList(async () => {
+        try {
+          const { data } = await api.get('/tasks');
 
-        setTaksList(data);
-      } catch {
-        setTaksList([]);
-      }
+          setTaksList(data);
+        } catch {
+          setTaksList([]);
+        }
+      });
     }
 
     fetchTasks();
   }, []);
 
-  function handleMarkingTaskAsCompleted(id: string) {
-    setTaksList((state) =>
-      state.map((task) => {
-        if (task.id === id) {
-          const is_completed = !task.is_completed;
-          return { ...task, is_completed };
-        }
+  async function handleMarkingTaskAsCompleted(id: string) {
+    setIsPedingTask(async () => {
+      try {
+        const { data } = await api.patch(`/tasks/${id}/toggle`);
 
-        return task;
-      }),
-    );
+        setTaksList((prevState) =>
+          prevState.map((task) => (task.id === id ? data : task)),
+        );
+      } catch {
+        toast.error('Ocorreu um erro, tente novamente!');
+      }
+    });
   }
-
-  // function handleDeleteTask(id: string) {
-  //   setTaksList((state) => state.filter((task) => task.id !== id));
-  // }
 
   return (
     <>
@@ -65,11 +68,16 @@ export function App() {
 
       <main className={styles.main}>
         <AddTask onAddNewTask={addNewTask} />
-        <TaskList
-          tasksList={tasksList}
-          onMarkingTaskAsCompleted={handleMarkingTaskAsCompleted}
-          onDeleteTask={handleDeleteTask}
-        />
+        {!isLoadingTaskList ? (
+          <TaskList
+            isPeding={isPedingTask}
+            tasksList={tasksList}
+            onMarkingTaskAsCompleted={handleMarkingTaskAsCompleted}
+            onDeleteTask={handleDeleteTask}
+          />
+        ) : (
+          <p>Carregando...</p>
+        )}
       </main>
     </>
   );

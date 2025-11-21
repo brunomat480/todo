@@ -7,6 +7,8 @@ import styles from './styles.module.css';
 
 interface ITaskCard {
   task: ITask;
+  // eslint-disable-next-line react/no-unused-prop-types, react/require-default-props
+  isPeding?: boolean;
   onMarkingTaskAsCompleted: (value: string) => void;
   onDeleteTask: (value: string) => Promise<void>;
 }
@@ -15,6 +17,7 @@ export function TaskCard({
   task,
   onMarkingTaskAsCompleted,
   onDeleteTask,
+  isPeding,
 }: ITaskCard) {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -45,9 +48,10 @@ export function TaskCard({
   }, [task, onMarkingTaskAsCompleted]);
 
   return (
-    <div className={styles.task}>
+    <div className={styles.task} style={{ opacity: !isPeding ? 1 : 0.5 }}>
       <div>
         <input
+          disabled={isPeding}
           value={task.id}
           checked={task.is_completed}
           onChange={() => onMarkingTaskAsCompleted(task.id)}
@@ -59,7 +63,11 @@ export function TaskCard({
         </p>
       </div>
 
-      <button onClick={() => onDeleteTask(task.id)} type="button">
+      <button
+        disabled={isPeding}
+        onClick={() => onDeleteTask(task.id)}
+        type="button"
+      >
         <Trash size={24} />
       </button>
     </div>
