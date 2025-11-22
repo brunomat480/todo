@@ -1,5 +1,5 @@
 import { Trash } from '@phosphor-icons/react';
-import { useCallback, useEffect, useRef, useTransition } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
 
 import { ITask } from '@/@types/ITask';
@@ -20,19 +20,20 @@ export function TaskCard({
 }: ITaskCard) {
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const [isPedingTask, setIsPedingTask] = useTransition();
+  const [isLoadind, setIsLoadind] = useState(false);
 
   const handleMarkingTaskAsCompleted = useCallback(
     async (id: string) => {
-      setIsPedingTask(async () => {
-        try {
-          const { data } = await api.patch(`/tasks/${id}/toggle`);
+      setIsLoadind(true);
+      try {
+        const { data } = await api.patch(`/tasks/${id}/toggle`);
 
-          markingTaskAsCompleted(data);
-        } catch {
-          toast.error('Ocorreu um erro, tente novamente!');
-        }
-      });
+        markingTaskAsCompleted(data);
+      } catch {
+        toast.error('Ocorreu um erro, tente novamente!');
+      } finally {
+        setIsLoadind(true);
+      }
     },
     [markingTaskAsCompleted],
   );
@@ -65,24 +66,25 @@ export function TaskCard({
 
   const handleDeleteTask = useCallback(
     async (id: string) => {
-      setIsPedingTask(async () => {
-        try {
-          await api.delete(`/tasks/${id}`);
+      setIsLoadind(true);
+      try {
+        await api.delete(`/tasks/${id}`);
 
-          deleteTask(id);
-        } catch {
-          toast.error('Erro ao deletar tarefa, tente novamente!');
-        }
-      });
+        deleteTask(id);
+      } catch {
+        toast.error('Erro ao deletar tarefa, tente novamente!');
+      } finally {
+        setIsLoadind(false);
+      }
     },
     [deleteTask],
   );
 
   return (
-    <div className={styles.task} style={{ opacity: !isPedingTask ? 1 : 0.5 }}>
+    <div className={styles.task} style={{ opacity: !isLoadind ? 1 : 0.5 }}>
       <div>
         <input
-          disabled={isPedingTask}
+          disabled={isLoadind}
           value={task.id}
           checked={task.is_completed}
           onChange={() => handleMarkingTaskAsCompleted(task.id)}
@@ -95,7 +97,7 @@ export function TaskCard({
       </div>
 
       <button
-        disabled={isPedingTask}
+        disabled={isLoadind}
         onClick={() => handleDeleteTask(task.id)}
         type="button"
       >
