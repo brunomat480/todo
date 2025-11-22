@@ -150,7 +150,7 @@ export function Chat({ sendSendMessageChat }: IChatProps) {
       {isOpen && (
         <div className={styles.chatContainer} ref={chatContainerRef}>
           <div className={styles.chatHeader}>
-            <h3>Gerencie suas tarefas</h3>
+            <h3>Controle suas tarefas</h3>
             <button
               type="button"
               className={styles.closeButton}
