@@ -8,16 +8,16 @@ import styles from './styles.module.css';
 interface ITaskList {
   tasksList: ITask[];
   // eslint-disable-next-line react/require-default-props
-  isPeding?: boolean;
-  onMarkingTaskAsCompleted: (value: string) => void;
-  onDeleteTask: (value: string) => Promise<void>;
+  // isPeding?: boolean;
+  markingTaskAsCompleted: (value: ITask) => void;
+  deleteTask: (value: string) => Promise<void>;
 }
 
 export function TaskList({
   tasksList,
-  isPeding,
-  onMarkingTaskAsCompleted,
-  onDeleteTask,
+  // isPeding,
+  markingTaskAsCompleted,
+  deleteTask,
 }: ITaskList) {
   return (
     <div className={styles.container}>
@@ -27,11 +27,11 @@ export function TaskList({
           <div className={styles.tasks}>
             {tasksList.map((task) => (
               <TaskCard
-                isPeding={isPeding}
+                // isPeding={isPeding}
                 key={task.id}
                 task={task}
-                onMarkingTaskAsCompleted={onMarkingTaskAsCompleted}
-                onDeleteTask={onDeleteTask}
+                markingTaskAsCompleted={markingTaskAsCompleted}
+                deleteTask={deleteTask}
               />
             ))}
           </div>

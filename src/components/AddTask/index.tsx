@@ -8,10 +8,10 @@ import { api } from '@/lib/api';
 import styles from './styles.module.css';
 
 interface IAddTaskProps {
-  onAddNewTask: (value: ITask) => void;
+  addNewTask: (value: ITask) => void;
 }
 
-export function AddTask({ onAddNewTask }: IAddTaskProps) {
+export function AddTask({ addNewTask }: IAddTaskProps) {
   const [description, setDescription] = useState('');
   const [taskValidate, setTaskValidate] = useState('');
   const [isCreatingTask, setIsCreatingTask] = useTransition();
@@ -35,7 +35,7 @@ export function AddTask({ onAddNewTask }: IAddTaskProps) {
         const { data } = await api.post('/tasks', {
           description,
         });
-        onAddNewTask(data);
+        addNewTask(data);
         setDescription('');
       } catch {
         toast.error('Erro ao criar tarefa, tente novamente!');
