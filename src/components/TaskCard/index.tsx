@@ -32,7 +32,7 @@ export function TaskCard({
       } catch {
         toast.error('Ocorreu um erro, tente novamente!');
       } finally {
-        setIsLoadind(true);
+        setIsLoadind(false);
       }
     },
     [markingTaskAsCompleted],
