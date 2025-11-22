@@ -1,5 +1,6 @@
 /* eslint-disable indent */
 import '@/global.css';
+import { CircleNotch } from '@phosphor-icons/react';
 import { useEffect, useState, useTransition } from 'react';
 import { toast, Toaster } from 'sonner';
 
@@ -117,7 +118,7 @@ export function App() {
 
       <main className={styles.main}>
         <AddTask onAddNewTask={addNewTask} />
-        {!isLoadingTaskList ? (
+        {isLoadingTaskList ? (
           <TaskList
             isPeding={isPedingTask}
             tasksList={tasksList}
@@ -125,7 +126,9 @@ export function App() {
             onDeleteTask={handleDeleteTask}
           />
         ) : (
-          <p>Carregando...</p>
+          <div className={styles['loading-spinner']}>
+            <CircleNotch />
+          </div>
         )}
       </main>
 
