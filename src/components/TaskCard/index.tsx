@@ -9,8 +9,6 @@ import styles from './styles.module.css';
 
 interface ITaskCard {
   task: ITask;
-  // eslint-disable-next-line react/no-unused-prop-types, react/require-default-props
-  // isPeding?: boolean;
   markingTaskAsCompleted: (value: ITask) => void;
   deleteTask: (value: string) => Promise<void>;
 }
@@ -19,7 +17,6 @@ export function TaskCard({
   task,
   markingTaskAsCompleted,
   deleteTask,
-  // isPeding,
 }: ITaskCard) {
   const inputRef = useRef<HTMLInputElement>(null);
 

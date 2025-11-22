@@ -48,12 +48,6 @@ export function App() {
   }, []);
 
   async function markingTaskAsCompleted(taskUpdate: ITask) {
-    const teste = tasksList.map((task) =>
-      task.id === taskUpdate.id ? taskUpdate : task,
-    );
-
-    console.log({ teste });
-
     setTaksList((prevState) =>
       prevState.map((task) => (task.id === taskUpdate.id ? taskUpdate : task)),
     );
@@ -109,7 +103,6 @@ export function App() {
         <AddTask addNewTask={addNewTask} />
         {!isLoadingTaskList ? (
           <TaskList
-            // isPeding={isPedingTask}
             tasksList={tasksList}
             markingTaskAsCompleted={markingTaskAsCompleted}
             deleteTask={deleteTask}

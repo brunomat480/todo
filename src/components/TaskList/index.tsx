@@ -7,15 +7,12 @@ import styles from './styles.module.css';
 
 interface ITaskList {
   tasksList: ITask[];
-  // eslint-disable-next-line react/require-default-props
-  // isPeding?: boolean;
   markingTaskAsCompleted: (value: ITask) => void;
   deleteTask: (value: string) => Promise<void>;
 }
 
 export function TaskList({
   tasksList,
-  // isPeding,
   markingTaskAsCompleted,
   deleteTask,
 }: ITaskList) {
@@ -27,7 +24,6 @@ export function TaskList({
           <div className={styles.tasks}>
             {tasksList.map((task) => (
               <TaskCard
-                // isPeding={isPeding}
                 key={task.id}
                 task={task}
                 markingTaskAsCompleted={markingTaskAsCompleted}
