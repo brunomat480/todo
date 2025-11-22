@@ -3,7 +3,7 @@
   <p><img align="center" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" />ReactJS</p>
   <p><img align="center" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-plain.svg" />CSS</p>        
 </div>
-<img src="https://user-images.githubusercontent.com/69431006/233848036-8b416eff-edee-47eb-959e-4a79947a04aa.png" />
+<img alt="Image" src="https://github.com/user-attachments/assets/4b0928fe-de93-49b7-a809-b02adf32171a" />
 
 ##
 
