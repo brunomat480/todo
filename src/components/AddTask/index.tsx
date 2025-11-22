@@ -1,5 +1,5 @@
-import { PlusCircle } from '@phosphor-icons/react';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { CircleNotch, PlusCircle } from '@phosphor-icons/react';
+import { ChangeEvent, FormEvent, useState, useTransition } from 'react';
 import { toast } from 'sonner';
 
 import { ITask } from '@/@types/ITask';
@@ -14,6 +14,7 @@ interface IAddTaskProps {
 export function AddTask({ onAddNewTask }: IAddTaskProps) {
   const [description, setDescription] = useState('');
   const [taskValidate, setTaskValidate] = useState('');
+  const [isCreatingTask, setIsCreatingTask] = useTransition();
 
   function handleTask(event: ChangeEvent<HTMLInputElement>) {
     setDescription(event.target.value);
@@ -21,7 +22,7 @@ export function AddTask({ onAddNewTask }: IAddTaskProps) {
     setTaskValidate('');
   }
 
-  async function handleAddNewTask(event: FormEvent) {
+  function handleAddNewTask(event: FormEvent) {
     event.preventDefault();
 
     if (!description) {
@@ -29,16 +30,17 @@ export function AddTask({ onAddNewTask }: IAddTaskProps) {
       return;
     }
 
-    try {
-      const { data } = await api.post('/tasks', {
-        description,
-      });
-      onAddNewTask(data);
-    } catch {
-      toast.error('Erro ao criar tarefa, tente novamente!');
-    }
-
-    setDescription('');
+    setIsCreatingTask(async () => {
+      try {
+        const { data } = await api.post('/tasks', {
+          description,
+        });
+        onAddNewTask(data);
+        setDescription('');
+      } catch {
+        toast.error('Erro ao criar tarefa, tente novamente!');
+      }
+    });
   }
 
   const isNewTaskEmpty = !description;
@@ -55,9 +57,22 @@ export function AddTask({ onAddNewTask }: IAddTaskProps) {
         />
         {taskValidate && <span>{taskValidate}</span>}
       </div>
-      <button type="submit" disabled={isNewTaskEmpty} className={styles.button}>
-        Criar
-        <PlusCircle size={24} weight="regular" />
+      <button
+        type="submit"
+        disabled={isNewTaskEmpty || isCreatingTask}
+        className={styles.button}
+      >
+        {!isCreatingTask ? (
+          <>
+            Criar
+            <PlusCircle size={24} weight="regular" />
+          </>
+        ) : (
+          <>
+            Criando...
+            <CircleNotch size={20} weight="bold" className={styles.loading} />
+          </>
+        )}
       </button>
     </form>
   );
