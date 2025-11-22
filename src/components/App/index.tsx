@@ -118,7 +118,7 @@ export function App() {
 
       <main className={styles.main}>
         <AddTask onAddNewTask={addNewTask} />
-        {isLoadingTaskList ? (
+        {!isLoadingTaskList ? (
           <TaskList
             isPeding={isPedingTask}
             tasksList={tasksList}
